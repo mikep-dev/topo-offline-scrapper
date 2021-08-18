@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import 'cypress-wait-until';
+
 Cypress.Commands.add('exists', selector => {
   return cy.get('body').then($body => {
     if ($body.find(selector).length) return selector;

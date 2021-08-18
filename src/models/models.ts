@@ -6,9 +6,12 @@ export type RockType = 'sandstone' | 'agglomerate' | 'granite' | 'limestone' | O
 export type Steepness = 'corner' | 'buttress' | 'chimney' | 'slab' | 'vertical' | 'overhang' | 'roof' | Other;
 export type Vegetation = 'openField' | 'forest' | Other;
 
-export interface Area {
+export interface BasicArea {
   url: string;
   name: string;
+}
+
+export interface Area extends BasicArea {
   cords: {
     lat: number;
     long: number;
@@ -23,4 +26,23 @@ export interface Area {
   kidFriendly: boolean;
   vegetation: Vegetation;
   description: string;
+  segments: Segment[];
+}
+
+export interface ClimbingRoute {
+  id: number;
+  parentRouteId?: number;
+  name: string;
+  order: number;
+  assurance: string;
+  grading: string;
+  author: string;
+  year: number;
+  length: number;
+  points: any;
+}
+
+export interface Segment {
+  imageUrl: string;
+  routes: ClimbingRoute[];
 }

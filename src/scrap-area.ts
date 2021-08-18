@@ -1,32 +1,13 @@
-import {Area, Aspect} from './models';
+import {Area, Aspect, ClimbingRoute, LoadRouteArgs} from './models';
 import {areaFactory, getAreaDataRowSelector} from './utils';
 import {mappers} from './utils/maps';
 
-interface ClimbingRoute {
-  name: string;
-  order: number;
-  assurance: string;
-  grading: string;
-  author: string;
-  year: number;
-  length: number;
-  pathData: any;
-}
-
-interface Segment {
-  name: string;
-  imageUrl: string;
-  routeIds: string[];
-}
-
-declare const TopoEditorFactory: () => {};
-
-export function scrapArea(url: string) {
+export function scrapArea(url: string, loadRouteCalls: LoadRouteArgs[]) {
   const area: Area = areaFactory(url);
-  cy.intercept({method: 'POST', url: '/topo/topoEditor/loadPaths'}).as('loadPaths');
-  cy.visit(url);
 
-  getPaths();
+  attachMainInterceptor(url);
+
+  cy.visit(url);
 
   getName(area);
   getDescription(area);
@@ -38,33 +19,80 @@ export function scrapArea(url: string) {
   getKidFriendly(area);
   getVegetation(area);
 
-  return [area, cy.wait(1)] as const;
+  // scrapSegments(area, loadRouteCalls);
+
+  return {area, chainable: cy.wait(0)} as const;
 }
 
-function getPaths() {
-  const segments: {[segmentId: string]: Segment} = {};
-  const routes: {[routeId: string]: ClimbingRoute} = {};
+function attachMainInterceptor(url: string) {
+  cy.intercept('**/*', {middleware: true}, req => {
+    const whiteList = [url, '/topo/default/jquery/js/jquery-1.9.1.js', '/topo/topoEditor/loadPaths'];
+    if (!whiteList.some(pattern => req.url.includes(pattern))) req.reply({statusCode: 200});
 
-  cy.exists('div.topoEditor').then(selector => {
-    if (selector === -1) return;
-
-    const spy = cy.spy(TopoEditorFactory);
-
-    cy.get(selector).each($el => {
-      const id = $el.attr('id')?.split('_')?.[1] ?? '';
-      const name = $el.closest('.ui-accordion-content').prev().text();
-      const imageUrl = '';
-      const routeIds: string[] = [];
-      $el.find('.pathLiBottom').each((_, path) => {
-        routeIds.push(path.id?.split('_')?.[1] ?? '');
-      });
-
-      segments[id] = {name, imageUrl, routeIds};
+    req.on('before:response', res => {
+      res.headers['cache-control'] = 'no-store';
     });
+  });
+}
 
-    cy.get(selector).then($el => {
-      console.log(segments);
-      // times($el.length, () = > cy.wait('@loadPaths').then(interception => console.log(interception.response?.body)));
+function parseClimbingRoutes(responseBody: any): ClimbingRoute[] {
+  const parsedBody = JSON.parse(responseBody);
+  const parsedDom = new DOMParser().parseFromString(parsedBody.pathsListBottom, 'text/html');
+  const processedHoldsData = cleanUpHoldsData(parsedBody.data);
+
+  const routes = Array.from(parsedDom.body.querySelectorAll('tr.row')).map((el, order): ClimbingRoute => {
+    const routeId = Number(el.id.split('_')?.[1]);
+    const columns = Array.from(el.querySelectorAll('td'));
+    const {points, parentRouteId} = processedHoldsData.find(holds => holds.routeId === routeId) ?? {};
+
+    return {
+      id: routeId,
+      parentRouteId,
+      order,
+      name: columns[1].textContent?.trim() ?? '',
+      assurance: columns[2].textContent?.trim() ?? '',
+      grading: columns[3].textContent?.trim() ?? '',
+      author: columns[5].textContent?.trim() ?? '',
+      year: Number(columns[6].textContent?.trim()),
+      length: Number(columns[7].textContent?.split(' ')?.[0]),
+      points,
+    };
+  });
+
+  return routes;
+}
+
+function cleanUpHoldsData(holdsData: any[]) {
+  return holdsData.map(entry => {
+    return {
+      points: entry.points
+        .sort((pointA: any, pointB: any) => pointA.order - pointB.order)
+        .map((point: any) => ({
+          x: point.x,
+          y: point.y,
+          kind: point.kindId,
+          visible: point.visible,
+        })),
+      routeId: entry.pathId,
+      parentRouteId: entry.parentPathId,
+    };
+  });
+}
+
+function scrapSegments(area: Area, loadRouteCalls: LoadRouteArgs[]) {
+  cy.wait(0).then(() => {
+    loadRouteCalls.forEach(({imageId, imageUrl, pathId}) => {
+      cy.request({
+        url: '/topo/topoEditor/loadPaths',
+        method: 'POST',
+        body: {imageId, pathId},
+        form: true,
+      }).then(res => {
+        area.segments.push({
+          imageUrl,
+          routes: parseClimbingRoutes(res.body),
+        });
+      });
     });
   });
 }

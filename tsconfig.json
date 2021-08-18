@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
       "target": "es5",
-      "lib": ["es5", "dom"],
-      "types": ["cypress"],
+      "lib": ["es6", "dom"],
+      "types": ["cypress", "node", "cypress-wait-until"],
       "module": "CommonJS",
       "declaration": true,
       "outDir": "./dist",

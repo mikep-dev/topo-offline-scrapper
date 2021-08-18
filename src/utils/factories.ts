@@ -15,6 +15,7 @@ export function areaFactory(url: string): Area {
     kidFriendly: false,
     vegetation: OTHER,
     description: '',
+    segments: [],
   };
 }
 

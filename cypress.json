@@ -1,5 +1,10 @@
 {
   "integrationFolder": "src",
   "video": false,
-  "watchForFileChanges": true
+  "screenshotOnRunFailure": false,
+  "watchForFileChanges": true,
+  "retries": {
+    "runMode": 5,
+    "openMode": 0
+  }
 }
