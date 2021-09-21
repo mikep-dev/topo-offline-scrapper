@@ -1,5 +1,3 @@
-export interface LoadRouteArgs {
-  imageId: number;
-  pathId: number;
-  imageUrl: string;
-}
+import {Segment} from '.';
+
+export type FetchSegmentCallArgs = Pick<Segment, 'id' | 'imageUrl'>;

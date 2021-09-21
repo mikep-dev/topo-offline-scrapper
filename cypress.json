@@ -4,7 +4,6 @@
   "screenshotOnRunFailure": false,
   "watchForFileChanges": true,
   "retries": {
-    "runMode": 5,
-    "openMode": 0
+    "runMode": 5
   }
 }

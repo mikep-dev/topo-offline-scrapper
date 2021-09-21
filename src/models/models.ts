@@ -12,6 +12,7 @@ export interface BasicArea {
 }
 
 export interface Area extends BasicArea {
+  categories: Category[];
   cords: {
     lat: number;
     long: number;
@@ -29,7 +30,19 @@ export interface Area extends BasicArea {
   segments: Segment[];
 }
 
+export interface Category {
+  name: string;
+  url: string;
+}
+
+export interface Segment {
+  id: number;
+  imageUrl: string;
+  name: string;
+}
+
 export interface ClimbingRoute {
+  segmentId: number;
   id: number;
   parentRouteId?: number;
   name: string;
@@ -39,10 +52,5 @@ export interface ClimbingRoute {
   author: string;
   year: number;
   length: number;
-  points: any;
-}
-
-export interface Segment {
-  imageUrl: string;
-  routes: ClimbingRoute[];
+  holds: any[];
 }

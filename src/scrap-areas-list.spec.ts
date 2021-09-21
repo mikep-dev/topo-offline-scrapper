@@ -16,7 +16,7 @@ describe('scrap areas list', () => {
   });
 
   after(() => {
-    cy.writeFile('areas-list.json', areasList);
+    cy.writeFile('output/areas-list.json', areasList);
   });
 
   function scrapPage() {
@@ -27,8 +27,8 @@ describe('scrap areas list', () => {
       });
     });
 
-    cy.exists('span.current.page + span.page > a').then(selector => {
-      if (selector === -1) return;
+    cy.exists('span.current.page + span.page > a').then(({exists, selector}) => {
+      if (!exists) return;
 
       cy.get(selector)
         .click()

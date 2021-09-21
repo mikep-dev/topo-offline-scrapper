@@ -1,4 +1,4 @@
-import {Area, Mapper, Dict, OTHER, Other} from '../models';
+import {Area, Mapper, Dict, OTHER} from '../models';
 
 export function areaFactory(url: string): Area {
   return {
@@ -16,6 +16,7 @@ export function areaFactory(url: string): Area {
     vegetation: OTHER,
     description: '',
     segments: [],
+    categories: [],
   };
 }
 
