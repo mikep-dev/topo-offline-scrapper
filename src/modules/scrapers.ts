@@ -1,138 +1,83 @@
-import {scrapers} from '.';
-import {Area, Aspect, FetchSegmentCallArgs} from '../models';
-import {areaFactory, mappers, REQUEST_TIMEOUT} from '../utils';
-import {fetchClimbingRoutes, parseClimbingRoutes} from './fetch-climbing-holds';
+import {Aspect, SectionKeyset} from '../models';
+import {mappers, REQUEST_TIMEOUT} from '../utils';
+import {fetchClimbingRoutesAndHolds} from './fetch-climbing-holds';
 
 export const getAreaDataRowSelector = (title: string) => `tr:has(div[title="${title}"]) > td:last-child > span`;
 
-export function getName(area: Area) {
-  cy.exists('div.title h1').then(({exists, selector}) => {
-    if (!exists) return;
-
-    cy.get(selector).then($el => {
-      area.name = $el.text();
-    });
-  });
+export function unsafeGetName() {
+  return cy.get('div.title h1').then($el => $el && $el.text());
 }
 
-export function getCategories(area: Area) {
-  cy.exists('div.obbreadcrumbs span:nth-child(n+3) a').then(({exists, selector}) => {
-    if (!exists) return;
-
-    cy.get(selector).each($el => {
-      area.categories.push({
-        name: $el.text().trim(),
-        url: $el.attr('href') ?? '',
-      });
-    });
-  });
+export function getCategories() {
+  return cy.safeGet('div.obbreadcrumbs span:nth-child(n+3) a').then(
+    $els =>
+      $els &&
+      $els.toArray().map(el => ({
+        name: Cypress.$(el).text().trim(),
+        url: Cypress.$(el).attr('href') ?? '',
+      })),
+  );
 }
 
-export function getCords(area: Area) {
-  cy.exists('span.dataSm').then(({exists, selector}) => {
-    if (!exists) return;
-
-    cy.get(selector).then($el => {
-      const cords = $el.text().split(',').map(Number);
-
-      area.cords = {
-        lat: cords[0],
-        long: cords[1],
-      };
-    });
-  });
+export function getCords() {
+  return cy.safeGet('span.dataSm').then(
+    $el =>
+      $el && {
+        lat: $el.text().split(',').map(Number)[0],
+        long: $el.text().split(',').map(Number)[1],
+      },
+  );
 }
 
-export function getRockType(area: Area) {
-  cy.exists(getAreaDataRowSelector('Rodzaj skały')).then(({exists, selector}) => {
-    if (!exists) return;
-
-    cy.get(selector).then($el => {
-      area.rockType = mappers.mapRockType($el.text());
-    });
-  });
+export function getRockType() {
+  return cy.safeGet(getAreaDataRowSelector('Rodzaj skały')).then($el => $el && mappers.mapRockType($el.text()));
 }
 
-export function getAspect(area: Area) {
-  cy.exists('div.wallFacing img').then(({exists, selector}) => {
-    if (!exists) return;
-
-    cy.get(selector).each($el => {
-      area.aspect.push($el.attr('alt') as Aspect);
-    });
-  });
+export function getAspect() {
+  return cy
+    .safeGet('div.wallFacing img')
+    .then($els => $els && $els.toArray().map(el => Cypress.$(el).attr('alt') as Aspect));
 }
 
-export function getSteepness(area: Area) {
-  cy.exists(getAreaDataRowSelector('Dostępne formacje')).then(({exists, selector}) => {
-    if (!exists) return;
-
-    cy.get(selector).then($el => {
-      area.steepness = $el.text().replace(/\s+/g, ' ').trim().split(' ').map(mappers.mapSteepness);
-    });
-  });
+export function getSteepness() {
+  return cy
+    .safeGet(getAreaDataRowSelector('Dostępne formacje'))
+    .then($el => $el && $el.text().replace(/\s+/g, ' ').trim().split(' ').map(mappers.mapSteepness));
 }
 
-export function getApproachTime(area: Area) {
-  cy.exists(getAreaDataRowSelector('Czas dojścia')).then(({exists, selector}) => {
-    if (!exists) return;
-
-    cy.get(selector).then($el => {
-      area.approachTime = Number($el.text().split(' ')[0]);
-    });
-  });
+export function getApproachTime() {
+  return cy.safeGet(getAreaDataRowSelector('Czas dojścia')).then($el => $el && Number($el.text().split(' ')[0]));
 }
 
-export function getKidFriendly(area: Area) {
-  cy.exists(getAreaDataRowSelector('Przyjazna dzieciom')).then(({exists, selector}) => {
-    if (!exists) return;
-
-    cy.get(selector).then($el => {
-      area.kidFriendly = mappers.mapBoolean($el.text());
-    });
-  });
+export function getKidFriendly() {
+  return cy.safeGet(getAreaDataRowSelector('Przyjazna dzieciom')).then($el => $el && mappers.mapBoolean($el.text()));
 }
 
-export function getVegetation(area: Area) {
-  cy.exists(getAreaDataRowSelector('Otoczenie')).then(({exists, selector}) => {
-    if (!exists) return;
-
-    cy.get(selector).then($el => {
-      area.vegetation = mappers.mapVegetation($el.text());
-    });
-  });
+export function getVegetation() {
+  return cy.safeGet(getAreaDataRowSelector('Otoczenie')).then($el => $el && mappers.mapVegetation($el.text()));
 }
 
-export function getDescription(area: Area) {
-  cy.exists('span.desc').then(({exists, selector}) => {
-    if (!exists) return;
-
-    cy.get(selector).then($el => {
-      area.description = $el.text();
-    });
-  });
+export function getDescription() {
+  return cy.safeGet('span.desc').then($el => $el && $el.text());
 }
 
-export function scrapSegments(area: Area, fetchSegmentCallsArgs: FetchSegmentCallArgs[]) {
-  cy.wait(0).then(() => {
-    area.segments = fetchSegmentCallsArgs.map(callArgs => ({
+export function getImageUrl() {
+  return cy.safeGet('img#main-image').then($el => $el && $el.attr('src'));
+}
+
+export function scrapSegments(sectionKeysets: SectionKeyset[]) {
+  return cy.wait(0).then(() =>
+    sectionKeysets.map(callArgs => ({
       id: callArgs.id,
       imageUrl: callArgs.imageUrl,
-      name: '',
-    }));
-  });
+      name: cy.$$(`div#topoEditor_${callArgs.id}`).closest('h5~div').prev().text(),
+    })),
+  );
 }
 
-export function scrapClimbingRoutes(fetchSegmentCallsArgs: FetchSegmentCallArgs[]) {
+export function scrapClimbingRoutesAndHolds(sectionKeysets: SectionKeyset[]) {
   return cy
     .wait(0)
-    .then(() => cy.log(`Scraping ${fetchSegmentCallsArgs.length} climbing routes...`))
-    .then({timeout: REQUEST_TIMEOUT}, () => fetchClimbingRoutes(fetchSegmentCallsArgs))
-    .then(responses =>
-      responses.map(({response, fetchSegmentCallArgs}) => {
-        const routes = parseClimbingRoutes(response);
-
-        return routes.map(route => ({...route, segmentId: fetchSegmentCallArgs.id}));
-      }),
-    );
+    .then(() => cy.log(`Scraping ${sectionKeysets.length} climbing routes...`))
+    .then({timeout: REQUEST_TIMEOUT}, () => fetchClimbingRoutesAndHolds(sectionKeysets));
 }

@@ -26,8 +26,8 @@
 
 import 'cypress-wait-until';
 
-Cypress.Commands.add('exists', selector => {
+Cypress.Commands.add('safeGet', selector => {
   return cy.get('body', {log: false}).then($body => {
-    return {exists: !!$body.find(selector).length, selector};
+    return !!$body.find(selector).length ? cy.get(selector) : null;
   });
 });

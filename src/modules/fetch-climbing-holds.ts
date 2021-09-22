@@ -1,95 +1,86 @@
-import {ClimbingRoute, FetchSegmentCallArgs} from '../models';
+import {ClimbingHold, ClimbingRoute, RawClimbingRoutesData, SectionKeyset as SectionKeyset} from '../models';
 
-export function fetchClimbingRoutes(fetchSegmentCallsArgs: FetchSegmentCallArgs[]) {
-  const loadClimbingRoutePromises = fetchSegmentCallsArgs.map(
-    fetchSegmentCallArgs =>
-      new Promise<{response: any; fetchSegmentCallArgs: FetchSegmentCallArgs}>((resolve, reject) => {
-        fetchClimbingRoute(fetchSegmentCallArgs)
-          .then(response => resolve({response, fetchSegmentCallArgs}))
-          .catch(reject);
-      }),
-  );
+export async function fetchClimbingRoutesAndHolds(sectionKeysets: SectionKeyset[]) {
+  const sections = await Promise.all(sectionKeysets.map(fetchSection));
 
-  return Promise.all(loadClimbingRoutePromises);
+  return {
+    climbingRoutes: sections.flatMap(section => section.climbingRoutes),
+    climbingHolds: sections.flatMap(section => section.climbingHolds),
+  };
 }
 
-export function parseClimbingRoutes(responseBody: any): ClimbingRoute[] {
-  const parsedDom = new DOMParser().parseFromString(responseBody.pathsListBottom, 'text/html');
-  const processedHoldsData = cleanUpHoldsData(responseBody.data);
+export async function fetchSection(sectionKeyset: SectionKeyset) {
+  const body = new FormData();
+  body.append('imageId', String(sectionKeyset.id));
+  body.append('imageUrl', sectionKeyset.imageUrl);
+  body.append('pathId', '0');
 
-  return Array.from(parsedDom.body.querySelectorAll('tr.row')).map((el, order): ClimbingRoute => {
+  const response = await fetch('https://topo.portalgorski.pl/topo/topoEditor/loadPaths', {method: 'POST', body});
+  const responseBody = (await response.json()) as RawClimbingRoutesData;
+
+  return {
+    climbingRoutes: parseClimbingRoutes(responseBody, sectionKeyset.id),
+    climbingHolds: parseClimbingHolds(responseBody),
+  };
+}
+
+function parseClimbingRoutes(data: RawClimbingRoutesData, sectionId: number): ClimbingRoute[] {
+  const parsedDom = new DOMParser().parseFromString(data.pathsListBottom, 'text/html');
+
+  return Array.from(parsedDom.body.querySelectorAll('tr.row')).map(el => {
     const routeId = Number(el.id.split('_')?.[1]);
     const columns = Array.from(el.querySelectorAll('td'));
-    const {holds, parentRouteId} = processedHoldsData.find(holds => holds.routeId === routeId) ?? {};
 
     return {
-      segmentId: -1,
       id: routeId,
-      parentRouteId,
-      order,
+      sectionId,
+      parentRouteId: data.data.find(routeEntry => routeEntry?.pathId === routeId)?.parentPathId,
       name: columns[1].textContent?.trim() ?? '',
       assurance: columns[2].textContent?.trim() ?? '',
       grading: columns[3].textContent?.trim() ?? '',
       author: columns[5].textContent?.trim() ?? '',
       year: Number(columns[6].textContent?.trim()),
       length: Number(columns[7].textContent?.trim().split(' ')?.[0]),
-      holds,
     };
   });
 }
 
-function cleanUpHoldsData(holdsData: any[]) {
-  return holdsData.map(entry => ({
-    holds: entry.points
-      .sort((pointA: any, pointB: any) => pointA.order - pointB.order)
-      .map((point: any) => ({
-        x: point.x,
-        y: point.y,
-        order: point.order,
-        kind: point.kindId,
-        kindName: point.kindName,
-        typeId: point.typeId,
-        visible: point.visible,
-      })),
-    routeId: entry.pathId,
-    parentRouteId: entry.parentPathId,
-  }));
+type LimiterWithHoldId = {holdId: number; limiter: string};
+function parseLimiters(data: RawClimbingRoutesData): LimiterWithHoldId[] {
+  const parsedDom = new DOMParser().parseFromString(data.pointsTooltips, 'text/html');
+  const tooltips = Array.from(parsedDom.body.querySelectorAll('.pointTooltip'));
+
+  return tooltips.reduce<LimiterWithHoldId[]>((acc, cur) => {
+    if (cur.querySelector('.title')?.textContent !== 'ogranicznik') return acc;
+
+    acc.push({
+      holdId: Number(cur.id?.split('_')?.[1]) || -1,
+      limiter: cur.querySelector('.description')?.textContent ?? '',
+    });
+
+    return acc;
+  }, []);
 }
 
-// function scrapSegments(area: Area, loadRouteCalls: LoadRouteArgs[]) {
-//   const rawHoldsData: any[] = [];
+function parseClimbingHolds(data: RawClimbingRoutesData): ClimbingHold[] {
+  const limiters = parseLimiters(data);
 
-//   cy.wait(0).then(() => {
-//     loadRouteCalls.forEach(({imageId, imageUrl, pathId}) => {
-//       cy.request({
-//         url: '/topo/topoEditor/loadPaths',
-//         method: 'POST',
-//         body: {imageId, pathId},
-//         form: true,
-//         timeout: 120000,
-//       }).then(res => {
-//         const parsingResult = parseClimbingRoutes(res.body);
-
-//         area.segments.push({
-//           imageUrl,
-//           routes: parsingResult.routes,
-//         });
-
-//         rawHoldsData.push(parsingResult.rawHoldsData);
-//       });
-//     });
-//   });
-
-//   return rawHoldsData;
-// }
-
-async function fetchClimbingRoute(loadRouteArgs: FetchSegmentCallArgs) {
-  const body = new FormData();
-  body.append('imageId', String(loadRouteArgs.id));
-  body.append('imageUrl', loadRouteArgs.imageUrl);
-  body.append('pathId', '0');
-
-  const response = fetch('https://topo.portalgorski.pl/topo/topoEditor/loadPaths', {method: 'POST', body});
-
-  return (await response).json();
+  return data.data.flatMap(route =>
+    route.points
+      .sort((pointA, pointB) => pointA.order - pointB.order)
+      .map(
+        (point): ClimbingHold => ({
+          x: point.x,
+          y: point.y,
+          order: point.order,
+          kindId: point.kindId,
+          kindName: point.kindName,
+          typeId: point.typeId,
+          visible: point.visible,
+          routeId: point.pathId,
+          sectionId: route.imageId,
+          limiter: limiters.find(limiter => limiter.holdId === point.pointId)?.limiter,
+        }),
+      ),
+  );
 }

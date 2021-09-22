@@ -27,7 +27,8 @@ export interface Area extends BasicArea {
   kidFriendly: boolean;
   vegetation: Vegetation;
   description: string;
-  segments: Segment[];
+  imageUrl: string;
+  sections: Section[];
 }
 
 export interface Category {
@@ -35,22 +36,33 @@ export interface Category {
   url: string;
 }
 
-export interface Segment {
+export interface Section {
   id: number;
   imageUrl: string;
   name: string;
 }
 
 export interface ClimbingRoute {
-  segmentId: number;
+  sectionId: number;
   id: number;
   parentRouteId?: number;
   name: string;
-  order: number;
   assurance: string;
   grading: string;
   author: string;
   year: number;
   length: number;
-  holds: any[];
+}
+
+export interface ClimbingHold {
+  x: number;
+  y: number;
+  order: number;
+  kindId: number;
+  kindName: string;
+  typeId: number;
+  visible: boolean;
+  limiter?: string;
+  routeId: number;
+  sectionId: number;
 }

@@ -1,5 +1,8 @@
-import {Dict, RockType, Steepness, Vegetation} from '../models';
-import {mapperFactory} from './factories';
+import {Dict, Mapper, OTHER, RockType, Steepness, Vegetation} from '../models';
+
+function mapperFactory<T extends string>(map: Dict<T>): Mapper<T> {
+  return value => map[value.trim()] ?? OTHER;
+}
 
 const rockTypeMap: Dict<RockType> = {
   zlepieniec: 'agglomerate',

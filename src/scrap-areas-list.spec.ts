@@ -27,10 +27,10 @@ describe('scrap areas list', () => {
       });
     });
 
-    cy.exists('span.current.page + span.page > a').then(({exists, selector}) => {
-      if (!exists) return;
+    cy.safeGet('span.current.page + span.page > a').then($el => {
+      if (!$el) return;
 
-      cy.get(selector)
+      cy.wrap($el)
         .click()
         .then(() => {
           scrapPage();
