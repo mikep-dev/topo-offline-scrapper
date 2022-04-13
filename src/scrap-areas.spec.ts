@@ -1,10 +1,11 @@
 import {Area, BasicArea, ClimbingRoute, SectionKeyset, OTHER, ClimbingHold} from './models';
-import {filenamePrefixes, VISIT_TIMEOUT} from './utils';
+import {filenamePrefixes, OUTPUT_DIR, RetryService, SLICE_END, SLICE_START, VISIT_TIMEOUT} from './utils';
 import {attachMainInterceptor} from './modules/interceptors';
 import {scrapers} from './modules';
+import * as path from 'path';
 
-const sliceStart = Cypress.env('sliceStart') ?? 0;
-const sliceEnd = Cypress.env('sliceEnd') ?? 2;
+const sliceStart = Cypress.env(SLICE_START) ?? 0;
+const sliceEnd = Cypress.env(SLICE_END) ?? 5;
 
 describe('scrap areas', () => {
   let sectionKeysets: SectionKeyset[];
@@ -12,6 +13,8 @@ describe('scrap areas', () => {
   const areas: Area[] = [];
   const climbingRoutes: ClimbingRoute[] = [];
   const climbingHolds: ClimbingHold[] = [];
+
+  const retryService = new RetryService();
 
   beforeEach(() => {
     sectionKeysets = [];
@@ -27,6 +30,8 @@ describe('scrap areas', () => {
 
   (require('../cypress/fixtures/areas-list') as BasicArea[]).slice(sliceStart, sliceEnd).forEach(({name, url}) => {
     it(`scrap area ${name}`, function () {
+      retryService.check(name);
+
       attachMainInterceptor(url);
       cy.visit(url, {timeout: VISIT_TIMEOUT, responseTimeout: VISIT_TIMEOUT} as any);
 
@@ -57,9 +62,9 @@ describe('scrap areas', () => {
   afterEach(() => {
     const suffix = `_${sliceStart}-${sliceEnd}`;
 
-    cy.writeFile(`output/${filenamePrefixes.AREAS}${suffix}.json`, areas);
-    cy.writeFile(`output/${filenamePrefixes.CLIMBING_ROUTES}${suffix}.json`, climbingRoutes);
-    cy.writeFile(`output/${filenamePrefixes.CLIMBING_HOLDS}${suffix}.json`, climbingHolds);
+    cy.writeFile(path.join(OUTPUT_DIR, `${filenamePrefixes.AREAS}${suffix}.json`), areas);
+    cy.writeFile(path.join(OUTPUT_DIR, `${filenamePrefixes.CLIMBING_ROUTES}${suffix}.json`), climbingRoutes);
+    cy.writeFile(path.join(OUTPUT_DIR, `${filenamePrefixes.CLIMBING_HOLDS}${suffix}.json`), climbingHolds);
   });
 });
 

@@ -1,7 +1,7 @@
 import {ClimbingHold, ClimbingRoute, RawClimbingRoutesData, SectionKeyset as SectionKeyset} from '../models';
 
 export async function fetchClimbingRoutesAndHolds(sectionKeysets: SectionKeyset[]) {
-  const sections = await Promise.all(sectionKeysets.map(fetchSection));
+  const sections = await Promise.all(sectionKeysets.map(sectionKeyset => fetchSection(sectionKeyset)));
 
   return {
     climbingRoutes: sections.flatMap(section => section.climbingRoutes),
@@ -9,13 +9,26 @@ export async function fetchClimbingRoutesAndHolds(sectionKeysets: SectionKeyset[
   };
 }
 
-export async function fetchSection(sectionKeyset: SectionKeyset) {
+export async function fetchSection(
+  sectionKeyset: SectionKeyset,
+  tries = 1,
+  delay = 1000,
+): Promise<{climbingRoutes: ClimbingRoute[]; climbingHolds: ClimbingHold[]}> {
   const body = new FormData();
   body.append('imageId', String(sectionKeyset.id));
   body.append('imageUrl', sectionKeyset.imageUrl);
   body.append('pathId', '0');
 
   const response = await fetch('https://topo.portalgorski.pl/topo/topoEditor/loadPaths', {method: 'POST', body});
+  if (!response.ok) {
+    if (tries > 0) {
+      await new Promise(resolve => setTimeout(resolve, delay));
+      return fetchSection(sectionKeyset, tries - 1);
+    }
+
+    throw response;
+  }
+
   const responseBody = (await response.json()) as RawClimbingRoutesData;
 
   return {

@@ -1,0 +1,861 @@
+Last login: Fri Sep 24 22:29:50 on console
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+mikepwork:~ mikep$ cd git
+mikepwork:git mikep$ cd topo-offline-scrapper/
+mikepwork:topo-offline-scrapper mikep$ ls
+README.md	dist		output2		tsconfig.json
+cypress		node_modules	package.json	yarn.lock
+cypress.json	output		src
+mikepwork:topo-offline-scrapper mikep$ yarn parallel -n 2
+yarn run v1.22.10
+$ ts-node src/scripts/scrap-in-parallel -n 2
+Cleaning /Users/mikep/git/topo-offline-scrapper/output directory
+Starting 2 scraping processes
+$ cypress run --spec "src/scrap-areas.spec.ts" --headless --env=sliceStart=0,sliceEnd=314
+[1]
+[1] ====================================================================================================
+[1]
+[1]   (Run Starting)
+[1]
+[1]   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+[1]   │ Cypress:    8.4.0                                                                              │
+[1]   │ Browser:    Electron 91 (headless)                                                             │
+[1]   │ Specs:      1 found (scrap-areas.spec.ts)                                                      │
+[1]   │ Searched:   src/scrap-areas.spec.ts                                                            │
+[1]   └────────────────────────────────────────────────────────────────────────────────────────────────┘
+[1]
+[1]
+[1] ────────────────────────────────────────────────────────────────────────────────────────────────────
+[1]
+[1]   Running:  scrap-areas.spec.ts                                                             (1 of 1)
+$ cypress run --spec "src/scrap-areas.spec.ts" --headless --env=sliceStart=314,sliceEnd=627
+[1]
+[1]
+[1]   scrap areas
+[2]
+[2] ====================================================================================================
+[2]
+[2]   (Run Starting)
+[2]
+[2]   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+[2]   │ Cypress:    8.4.0                                                                              │
+[2]   │ Browser:    Electron 91 (headless)                                                             │
+[2]   │ Specs:      1 found (scrap-areas.spec.ts)                                                      │
+[2]   │ Searched:   src/scrap-areas.spec.ts                                                            │
+[2]   └────────────────────────────────────────────────────────────────────────────────────────────────┘
+[2]
+[2]
+[2] ────────────────────────────────────────────────────────────────────────────────────────────────────
+[2]
+[2]   Running:  scrap-areas.spec.ts                                                             (1 of 1)
+[2]
+[2]
+[2]   scrap areas
+[1]     ✓ scrap area Szczyrzyc (70130ms)
+[2]     ✓ scrap area Garb (66669ms)
+[1]     ✓ scrap area Złotniki (66523ms)
+[2]     ✓ scrap area Mnich (66083ms)
+[1]     ✓ scrap area Dupeczka (66393ms)
+[2]     ✓ scrap area Płetwa, Urwista, Podcięta (67332ms)
+[1]     ✓ scrap area Molenda (67563ms)
+[2]     ✓ scrap area Grzybki (70776ms)
+[1]     ✓ scrap area Kołkowa Skała (66365ms)
+[2]     ✓ scrap area Szafa (68176ms)
+[1]     ✓ scrap area Karniowicka Skała (73000ms)
+[2]     ✓ scrap area Biblioteka (80644ms)
+[1]     ✓ scrap area Postrzępiona Turnia (66287ms)
+[2]     ✓ scrap area Dziewica (67630ms)
+[2]     (Attempt 1 of 10) scrap area Słoneczne
+[2]     (Attempt 2 of 10) scrap area Słoneczne
+[1]     ✓ scrap area Pasterskie Skały (120122ms)
+[2]     ✓ scrap area Słoneczne (104124ms)
+[1]     ✓ scrap area Jaskółcza Skała (67428ms)
+[1]     ✓ scrap area Dębia Skała (72804ms)
+[2]     ✓ scrap area Przy Zamku (126682ms)
+[1]     ✓ scrap area Dziurawa Skała (70120ms)
+[2]     ✓ scrap area Gzylowe Skały (69037ms)
+[1]     ✓ scrap area Dolina Lejowa (90149ms)
+[2]     ✓ scrap area Dziurawiec (86772ms)
+[1]     ✓ scrap area Turniczka (69712ms)
+[2]     ✓ scrap area Wielka Skała (66474ms)
+[1]     ✓ scrap area Okienna (69878ms)
+[2]     ✓ scrap area Garliczka (76545ms)
+[1]     ✓ scrap area Orlik 2 (70246ms)
+[2]     ✓ scrap area Maniakówka (67996ms)
+[2]     ✓ scrap area Tumlin (34346ms)
+[1]     ✓ scrap area Wielbłąd (70902ms)
+[2]     ✓ scrap area Wykień (40587ms)
+[2]     ✓ scrap area Ciosowa (34319ms)
+[1]     ✓ scrap area Kruk (75523ms)
+[2]     ✓ scrap area Zelejowa (35293ms)
+[1]     ✓ scrap area Kramnica (37090ms)
+[2]     ✓ scrap area Czarny Kot (68159ms)
+[1]     ✓ scrap area Tomaszówki (67669ms)
+[1]     ✓ scrap area Obłazowa (35006ms)
+[2]     ✓ scrap area Biały Pies (68440ms)
+[1]     ✓ scrap area Stumilowy Kras (66440ms)
+[2]     ✓ scrap area Proxima Centauri (68328ms)
+[1]     ✓ scrap area Pozornica (68349ms)
+[2]     ✓ scrap area Diabelskie Mosty (67055ms)
+[1]     ✓ scrap area Sołtysowa (66228ms)
+[2]     ✓ scrap area Siekierezada (67241ms)
+[1]     ✓ scrap area Skalna Brama (68032ms)
+[2]     ✓ scrap area Szara Płyta (66884ms)
+[2]     (Attempt 1 of 10) scrap area Mała Zegarowa
+[1]     ✓ scrap area Baszty (69813ms)
+[2]     (Attempt 2 of 10) scrap area Mała Zegarowa
+[1]     ✓ scrap area Skalny Mur (102014ms)
+[1]     ✓ scrap area Trojan (87740ms)
+[2]     ✓ scrap area Mała Zegarowa (131069ms)
+[1]     ✓ scrap area Turnia Skwira (67571ms)
+[2]     ✓ scrap area Zegarowe (69912ms)
+[1]     ✓ scrap area Skalny Ząb (66640ms)
+[2]     ✓ scrap area Kursowa (66283ms)
+[1]     ✓ scrap area Iglica (67734ms)
+[2]     ✓ scrap area Dolne Skały (70342ms)
+[1]     ✓ scrap area Wyżnia (91347ms)
+[2]     ✓ scrap area Goncerzyca (94547ms)
+[1]     ✓ scrap area Mała (76960ms)
+[2]     ✓ scrap area Wróblowa (76747ms)
+[1]     ✓ scrap area Niżna (70064ms)
+[2]     ✓ scrap area Jamnicze (67680ms)
+[1]     ✓ scrap area Skała Pod Słupem (66016ms)
+[2]     ✓ scrap area Cydzownik (66623ms)
+[1]     ✓ scrap area Osobna (66236ms)
+[2]     ✓ scrap area Nietoperze (83882ms)
+[1]     ✓ scrap area Mączne Skały (68026ms)
+[2]     ✓ scrap area Skała z Krzyżem (66467ms)
+[1]     ✓ scrap area Brama (77297ms)
+[2]     ✓ scrap area Okręt (96297ms)
+[1]     ✓ scrap area Jednorożec (88275ms)
+[2]     ✓ scrap area Gołębnik (68325ms)
+[1]     ✓ scrap area Bulwa (66322ms)
+[2]     ✓ scrap area Kapelusz (75742ms)
+[1]     ✓ scrap area Łopatka (74425ms)
+[2]     ✓ scrap area Grań za Kapeluszem (85601ms)
+[1]     ✓ scrap area Kość (85761ms)
+[2]     ✓ scrap area Bigos i Wrota (75351ms)
+[1]     ✓ scrap area Witosza (71550ms)
+[2]     ✓ scrap area Skała 504 (66764ms)
+[1]     ✓ scrap area Żelazko (69762ms)
+[2]     ✓ scrap area Pierdolnik (67422ms)
+[1]     ✓ scrap area Totem (67755ms)
+[2]     ✓ scrap area Kapa (66465ms)
+[1]     ✓ scrap area Szafa i Kieł (67783ms)
+[2]     ✓ scrap area Wielka i Mała Cima (69527ms)
+[1]     ✓ scrap area Strużnicki Mur (68810ms)
+[2]     ✓ scrap area Wielbłąd (71230ms)
+[1]     ✓ scrap area Strużnicka Baszta (83836ms)
+[2]     ✓ scrap area Obelisk (80246ms)
+[1]     ✓ scrap area Skała Przy Szlaku i Pochyły Murek (97474ms)
+[2]     ✓ scrap area Ratusz (97608ms)
+[1]     ✓ scrap area Oblaj (88732ms)
+[2]     ✓ scrap area Suchy Połeć (69721ms)
+[1]     ✓ scrap area Obła (66433ms)
+[2]     ✓ scrap area Góra Birów część południowa (99122ms)
+[1]     ✓ scrap area Mała Biblioteka (69383ms)
+[1]     ✓ scrap area Jopek (66790ms)
+[2]     ✓ scrap area Góra Birów część północna (102060ms)
+[1]     ✓ scrap area Joker (67139ms)
+[2]     ✓ scrap area Brzuchacka Skała (78196ms)
+[1]     ✓ scrap area Jajo (75430ms)
+[2]     ✓ scrap area Pancernik (77273ms)
+[1]     ✓ scrap area Kamienny Krąg (67477ms)
+[2]     ✓ scrap area Nosorożec i Tapir (67553ms)
+[1]     ✓ scrap area Dziobata (67775ms)
+[2]     ✓ scrap area Słoń (66703ms)
+[1]     ✓ scrap area Borówka i Szyszka (67671ms)
+[2]     ✓ scrap area Młyńska Skała (66016ms)
+[2]     (Attempt 1 of 10) scrap area Sektor Okiennika i Słonecznej
+[2]     (Attempt 2 of 10) scrap area Sektor Okiennika i Słonecznej
+[1]     ✓ scrap area Bezimienna (69572ms)
+[2]     (Attempt 3 of 10) scrap area Sektor Okiennika i Słonecznej
+[1]     ✓ scrap area Widokowa (99187ms)
+[1]     ✓ scrap area Krucza Skała (67276ms)
+[2]     ✓ scrap area Sektor Okiennika i Słonecznej (121449ms)
+[1]     ✓ scrap area Bulder Zagórzański (68623ms)
+[2]     ✓ scrap area Okiennik (Mnich) (69664ms)
+[1]     ✓ scrap area Skała Przy Rzece (70623ms)
+[2]     ✓ scrap area Wysokie Okapy (69436ms)
+[1]     ✓ scrap area Kieł i Dziurawa (69735ms)
+[2]     ✓ scrap area Wieżyca (67889ms)
+[1]     ✓ scrap area Plaskula (69793ms)
+[2]     ✓ scrap area Jastrzębnik (74758ms)
+[1]     ✓ scrap area Januszowice (67664ms)
+[2]     ✓ scrap area Bloki Pod Krowią (66449ms)
+[1]     ✓ scrap area Fudalowa Skała (69820ms)
+[2]     ✓ scrap area Sarni Murek (66184ms)
+[2]     ✓ scrap area Czarny Mnich (67586ms)
+[1]     ✓ scrap area Leśna Turnia (99498ms)
+[2]     ✓ scrap area Demon (66854ms)
+[1]     ✓ scrap area Wampirek i Verdon (70166ms)
+[1]     ✓ scrap area Cisownik (67631ms)
+[2]     ✓ scrap area Sektor Turni Kursantów (99016ms)
+[1]     ✓ scrap area Skała Kopaniny (68531ms)
+[2]     ✓ scrap area Szaman (71008ms)
+[2]     ✓ scrap area Owca (68676ms)
+[1]     ✓ scrap area Grupa Parasola (99307ms)
+[2]     ✓ scrap area Jaskółka (67541ms)
+[1]     ✓ scrap area Śpiewacza Skała (67128ms)
+[2]     ✓ scrap area Plemnik (67173ms)
+[1]     ✓ scrap area Karczmisko w Kaczorowie (69485ms)
+[2]     ✓ scrap area Aligator (67032ms)
+[1]     ✓ scrap area Lama (67809ms)
+[2]     ✓ scrap area Piramidki (66024ms)
+[1]     ✓ scrap area Gubernator (99476ms)
+[2]     ✓ scrap area Filar Centralny (100597ms)
+[1]     ✓ scrap area Skalna Grzęda (98977ms)
+[2]     ✓ scrap area Wielbłąd (67117ms)
+[2]     ✓ scrap area Narożna Baszta (65745ms)
+[1]     ✓ scrap area Rozpadła (99087ms)
+[2]     ✓ scrap area Turnia Lechfora i Brzuchata (68406ms)
+[1]     ✓ scrap area Skały Z Literą (70770ms)
+[2]     ✓ scrap area Bąbel (66549ms)
+[1]     ✓ scrap area Zakonnik (67902ms)
+[2]     ✓ scrap area Turnia Cyklopa i Wielka Baszta (70649ms)
+[1]     ✓ scrap area Decjusz (66882ms)
+[2]     ✓ scrap area Słoneczna Turnia i Eigerek (67597ms)
+[1]     ✓ scrap area Rogatka (70455ms)
+[2]     ✓ scrap area Kursowe Skałki (66772ms)
+[1]     ✓ scrap area Rejon Aplitowej Skały (100019ms)
+[2]     ✓ scrap area Smoczy Grzbiet - Smocze Jajo (66504ms)
+[1]     ✓ scrap area Skała Teściowej (69405ms)
+[2]     ✓ scrap area Krowia Turnia (68087ms)
+[2]     (Attempt 1 of 10) scrap area Sektor Studniska
+[2]     (Attempt 2 of 10) scrap area Sektor Studniska
+[1]     ✓ scrap area Krucze Skały w Krapaczu (98813ms)
+[1]     ✓ scrap area Dziurawa Skała w Przesiece (66085ms)
+[2]     ✓ scrap area Sektor Studniska (120079ms)
+[1]     ✓ scrap area Sowiniec (69419ms)
+[2]     ✓ scrap area Popielarka (69968ms)
+[1]     ✓ scrap area Jamkowa Baszta (66986ms)
+[2]     ✓ scrap area Hokejka (66322ms)
+[1]     ✓ scrap area Jaskinia Jasna  (68581ms)
+[2]     ✓ scrap area Z Damskimi Ryskami (68580ms)
+[1]     ✓ scrap area Krzywość (66500ms)
+[2]     ✓ scrap area Wielki Dziad (67442ms)
+[1]     ✓ scrap area Mutne (66721ms)
+[2]     ✓ scrap area Ptak (67509ms)
+[1]     ✓ scrap area Mechata (67635ms)
+[2]     ✓ scrap area Ze Spadającymi Gwiazdami (67515ms)
+[1]     ✓ scrap area Biały Murek  (68625ms)
+[2]     ✓ scrap area Brzuszki Buddy (66468ms)
+[1]     ✓ scrap area Kitowa Skała (68226ms)
+[2]     ✓ scrap area Kazerma (67477ms)
+[1]     ✓ scrap area Niegowonice (68996ms)
+[2]     ✓ scrap area Sektor Zegarowej (100018ms)
+[1]     ✓ scrap area Kobyla Skała (67378ms)
+[2]     ✓ scrap area Lalka i Grań Aniołów (67073ms)
+[1]     ✓ scrap area Ścieżków Groń (98807ms)
+[2]     ✓ scrap area Wysoka (72343ms)
+[1]     ✓ scrap area Kominowa Skała i Wąwóz (66609ms)
+[2]     ✓ scrap area Z Błękitnymi Lotami (66974ms)
+[2]     (Attempt 1 of 10) scrap area Kajak, Okręt, Żaglowiec
+[2]     (Attempt 2 of 10) scrap area Kajak, Okręt, Żaglowiec
+[1]     ✓ scrap area Czartówka i Mnich Strużnicki (98562ms)
+[1]     (Attempt 1 of 10) scrap area Wielbłąd, Ślimak, Żółw
+[2]     ✓ scrap area Kajak, Okręt, Żaglowiec (87286ms)
+[2]     (Attempt 1 of 10) scrap area Głowa Cukru
+[2]     (Attempt 2 of 10) scrap area Głowa Cukru
+[1]     ✓ scrap area Wielbłąd, Ślimak, Żółw (109313ms)
+[2]     ✓ scrap area Głowa Cukru (90536ms)
+[1]     ✓ scrap area Dziób i Mrówcza Skała (66989ms)
+[1]     ✓ scrap area Biblioteka (69889ms)
+[2]     ✓ scrap area Córki, Mama i Tata (100926ms)
+[2]     ✓ scrap area Dziewica (69305ms)
+[1]     ✓ scrap area Starościńska Skała i Skalne Miasto (99071ms)
+[2]     ✓ scrap area Skała z Blokiem (66190ms)
+[1]     ✓ scrap area Szuflandia i Ząbek (70128ms)
+[2]     ✓ scrap area Skały przy zamku (78708ms)
+[1]     ✓ scrap area Rylec (66867ms)
+[2]     ✓ scrap area Trzecia, Czwarta Grzęda i Skoczek (69376ms)
+[1]     ✓ scrap area Ogrodowa (66632ms)
+[2]     ✓ scrap area Trzy Siostry (70280ms)
+[1]     ✓ scrap area Lustro (66733ms)
+[2]     ✓ scrap area Wielbłąd (67568ms)
+[1]     ✓ scrap area Fajka (99830ms)
+[2]     ✓ scrap area Sówka (66707ms)
+[1]     ✓ scrap area Przedmoście i Przyczółek (67324ms)
+[2]     ✓ scrap area Skrzat (66404ms)
+[2]     ✓ scrap area Dziurawy Blok (66458ms)
+[1]     ✓ scrap area Skalny Most (99051ms)
+[2]     ✓ scrap area Chomicza Skała (66525ms)
+[1]     ✓ scrap area Ścianki (70107ms)
+[2]     ✓ scrap area Rygiel (66702ms)
+[1]     ✓ scrap area Piec (68646ms)
+[2]     ✓ scrap area Blocheńska (67014ms)
+[1]     ✓ scrap area Malinowa (68588ms)
+[2]     ✓ scrap area Turnia Motocyklistów (67441ms)
+[1]     ✓ scrap area Romby, Pochyła, Kanion (67549ms)
+[2]     ✓ scrap area Turnia Brata Ziemowita i Plecy Widowni (66506ms)
+[1]     ✓ scrap area Zamek Bolczów (98619ms)
+[2]     ✓ scrap area Wschodnia Grań (66720ms)
+[2]     (Attempt 1 of 10) scrap area Okiennik Wielki
+[2]     (Attempt 2 of 10) scrap area Okiennik Wielki
+[1]     ✓ scrap area Strażnica (69520ms)
+[1]     ✓ scrap area Urwista (68308ms)
+[2]     ✓ scrap area Okiennik Wielki (118516ms)
+[1]     ✓ scrap area Sfinks (66553ms)
+[1]     ✓ scrap area Pierwsza (66951ms)
+[2]     ✓ scrap area Turnia Kukuczki, Szafa i Studnisko (99113ms)
+[1]     ✓ scrap area Bukowe Skały (68042ms)
+[2]     ✓ scrap area Mniszek, Szeroka Baszta i Krótka Grzęda (101124ms)
+[1]     ✓ scrap area Mała Strażnica (66818ms)
+[2]     ✓ scrap area Klawiatura (66519ms)
+[1]     ✓ scrap area Skała Przy Krzyżówce (67052ms)
+[2]     ✓ scrap area Skała z Grotą (66589ms)
+[1]     ✓ scrap area Miedziane Bloki (66856ms)
+[2]     ✓ scrap area Skrzypce (66932ms)
+[1]     ✓ scrap area Skalne Bramy (98721ms)
+[2]     ✓ scrap area Leski Kamień (101289ms)
+[1]     ✓ scrap area Głaziska Janowickie (67268ms)
+[2]     ✓ scrap area Biała Baszta (67696ms)
+[1]     ✓ scrap area Krowiarki (98755ms)
+[2]     ✓ scrap area Dolna Baszta (66803ms)
+[2]     ✓ scrap area Długa Grań (68174ms)
+[1]     ✓ scrap area Zipserowa Czuba (99583ms)
+[2]     ✓ scrap area Turnia Nad Kaskadami (67447ms)
+[1]     ✓ scrap area Zapomniana (66661ms)
+[1]     (Attempt 1 of 10) scrap area Krzyżna Skała
+[1]     (Attempt 2 of 10) scrap area Krzyżna Skała
+[2]     ✓ scrap area Młynarze (70309ms)
+[2]     ✓ scrap area Sadek (68108ms)
+[1]     ✓ scrap area Krzyżna Skała (119093ms)
+[2]     ✓ scrap area Kruk (66636ms)
+[1]     ✓ scrap area Trzy Korony (66591ms)
+[2]     ✓ scrap area Dwoista Turnia (67013ms)
+[1]     ✓ scrap area Smocza Baszta (66206ms)
+[1]     (Attempt 1 of 10) scrap area Sokolik Mały
+[1]     (Attempt 2 of 10) scrap area Sokolik Mały
+[2]     ✓ scrap area Jaskinia Mamutowa (131192ms)
+[2]     ✓ scrap area Ciosowa Turnia i Basior (68732ms)
+[1]     ✓ scrap area Sokolik Mały (115091ms)
+[2]     ✓ scrap area Dzikie Turnie (68091ms)
+[1]     ✓ scrap area Sokolik Duży (71535ms)
+[2]     ✓ scrap area Poprzeczna Turnia i Zaroślak (69464ms)
+[1]     ✓ scrap area Szara Turnia (66669ms)
+[1]     ✓ scrap area Swarożyc (72099ms)
+[2]     ✓ scrap area Polnik (99205ms)
+[1]     ✓ scrap area Solarium (67527ms)
+[2]     ✓ scrap area Żytnie Skały (70755ms)
+[1]     ✓ scrap area Sokolec (68491ms)
+[2]     ✓ scrap area Okiennik Będkowski (66428ms)
+[1]     ✓ scrap area Rogatka (67502ms)
+[2]     ✓ scrap area Pieninki (66486ms)
+[1]     ✓ scrap area Tępa i Ptak (67450ms)
+[2]     ✓ scrap area Skalny Mur (68456ms)
+[1]     ✓ scrap area Płetwa (66485ms)
+[2]     ✓ scrap area Brzuchata Turniczka (66683ms)
+[1]     ✓ scrap area Okienna (67520ms)
+[2]     ✓ scrap area Wielka Wronia Baszta (99380ms)
+[1]     ✓ scrap area Loża (67194ms)
+[2]     ✓ scrap area Zadnia Wronia Baszta (66482ms)
+[1]     ✓ scrap area Stodoła  (67728ms)
+[2]     ✓ scrap area Podcięta Turnia (67099ms)
+[1]     ✓ scrap area Skała nad Ogniskiem (67174ms)
+[2]     ✓ scrap area Omszała Turnia (67116ms)
+[1]     ✓ scrap area Michały (67538ms)
+[2]     ✓ scrap area Cyrk (66669ms)
+[1]     ✓ scrap area Stryszów (66803ms)
+[2]     ✓ scrap area Asteriks (66288ms)
+[1]     ✓ scrap area Rzędowa Skała (69096ms)
+[2]     ✓ scrap area Zaklęty Bastion (68587ms)
+[1]     ✓ scrap area Goła (67411ms)
+[2]     ✓ scrap area Fraszka i el Jebel (67360ms)
+[1]     ✓ scrap area Krzywa Turnia (99290ms)
+[2]     ✓ scrap area Sarnia Skała (91460ms)
+[1]     ✓ scrap area Jastrzębiec (67647ms)
+[2]     ✓ scrap area Forteca (66919ms)
+[1]     ✓ scrap area Jastrzębia Turnia (68508ms)
+[2]     ✓ scrap area Gęsiarnia (66808ms)
+[1]     ✓ scrap area Husyckie Skały (67385ms)
+[1]     ✓ scrap area Gilotyna (67620ms)
+[2]     ✓ scrap area Psiklatka (98580ms)
+[1]     ✓ scrap area Chatka (66729ms)
+[2]     ✓ scrap area Czarci Korytarz (98087ms)
+[1]     ✓ scrap area Buła (67280ms)
+[2]     ✓ scrap area Czarcie Wrota (69391ms)
+[1]     ✓ scrap area Bukowe Skały (67058ms)
+[2]     ✓ scrap area Hades (69102ms)
+[1]     ✓ scrap area Brzuchata (66628ms)
+[2]     ✓ scrap area Skała z Bluszczem (66856ms)
+[1]     ✓ scrap area Baba (66460ms)
+[2]     ✓ scrap area Reduta (67327ms)
+[1]     ✓ scrap area Zbójeckie Skały (66292ms)
+[2]     ✓ scrap area Sucha Baszta (67093ms)
+[1]     ✓ scrap area Piekielnik (70029ms)
+[2]     ✓ scrap area Turnia nad Szańcem (68048ms)
+[1]     ✓ scrap area Głazisko (66708ms)
+[2]     ✓ scrap area Brykada (67409ms)
+[1]     ✓ scrap area Dziobata (66858ms)
+[2]     ✓ scrap area Zakątek (66423ms)
+[1]     ✓ scrap area Krucze Skały (66609ms)
+[2]     ✓ scrap area Gaudynowska Baszta (67250ms)
+[1]     ✓ scrap area Krzywe Baszty (69449ms)
+[2]     ✓ scrap area Czubatka (Dry Igły) (66775ms)
+[2]     ✓ scrap area Mlecz (66888ms)
+[1]     ✓ scrap area Bobrowe Skały (131876ms)
+[2]     ✓ scrap area Turnia Wrzosy - PiS (66851ms)
+[1]     ✓ scrap area Pokutujące Skały (70745ms)
+[2]     ✓ scrap area Masyw Güllich (67730ms)
+[1]     ✓ scrap area Wieżyca (99890ms)
+[2]     ✓ scrap area Ołtarz (66552ms)
+[1]     ✓ scrap area Diablak (67629ms)
+[2]     ✓ scrap area Kuźnia (67022ms)
+[1]     ✓ scrap area Nowa Ziemia 2 (66639ms)
+[2]     ✓ scrap area Zyg-Zak (66681ms)
+[1]     ✓ scrap area Nowa Ziemia (68183ms)
+[2]     ✓ scrap area Wielka Zerwa (66596ms)
+[1]     ✓ scrap area Jerzmanice-Zdrój (68331ms)
+[2]     ✓ scrap area Wacman (66036ms)
+[1]     ✓ scrap area Kiełek (66370ms)
+[2]     ✓ scrap area Sępia Czułowska (69609ms)
+[1]     ✓ scrap area Pełcznica (68554ms)
+[2]     ✓ scrap area Łysina (66596ms)
+[1]     ✓ scrap area Kamieniołom Chwałków (67237ms)
+[2]     ✓ scrap area Kubincowa Skała (67299ms)
+[1]     ✓ scrap area Skotnicowa Skała (68344ms)
+[2]     ✓ scrap area Kubincowa Igła (66537ms)
+[1]     ✓ scrap area Strażnica (66893ms)
+[2]     ✓ scrap area Kubincowa Baszta (68806ms)
+[1]     ✓ scrap area Diabelska Przepaść (68643ms)
+[2]     ✓ scrap area Lalka (66497ms)
+[1]     ✓ scrap area Tropie (67413ms)
+[2]     ✓ scrap area Niedźwiedź (66608ms)
+[1]     ✓ scrap area Skały nad Kamienicą (66861ms)
+[2]     ✓ scrap area Kapliczka (69798ms)
+[1]     ✓ scrap area Rowerowe (66768ms)
+[2]     ✓ scrap area Łysa Kleszczowska (68177ms)
+[1]     ✓ scrap area Krzyżakowa Skała (66970ms)
+[2]     ✓ scrap area Dziurawa (66377ms)
+[1]     ✓ scrap area Rożnów (34389ms)
+[2]     ✓ scrap area Kaczor (66844ms)
+[1]     ✓ scrap area Kręta (Kozłowe Skały) (99155ms)
+[2]     ✓ scrap area Rybne Skały (67526ms)
+[1]     ✓ scrap area Balaton (66418ms)
+[2]     ✓ scrap area Wężowe Skały (99011ms)
+[1]     ✓ scrap area Szeroka Skała i Przecięta Skała (70820ms)
+[2]     ✓ scrap area Rodzynek (66139ms)
+[1]     ✓ scrap area Prawe Cmentarzysko (66061ms)
+[2]     ✓ scrap area Migdałkowa (69796ms)
+[1]     ✓ scrap area Turnia Potockiego (66885ms)
+[2]     ✓ scrap area Baszta nad Wodą (66079ms)
+[1]     ✓ scrap area Leśna Baszta (67049ms)
+[2]     ✓ scrap area Grań za Wysoką (68412ms)
+[1]     ✓ scrap area Rogata Turnia (66587ms)
+[2]     ✓ scrap area Wysoka Grań (68367ms)
+[1]     ✓ scrap area Zamkowe Skały (66516ms)
+[1]     ✓ scrap area Wierzchowska Grań i Leśna Skała (66537ms)
+[2]     ✓ scrap area Wysoka (98844ms)
+[1]     ✓ scrap area Szeroki Komin (67548ms)
+[1]     (Attempt 1 of 10) scrap area Wschodni Mur
+[2]     ✓ scrap area Fiala (102683ms)
+[2]     ✓ scrap area Zakonnik (66703ms)
+[1]     ✓ scrap area Wschodni Mur (77430ms)
+[2]     ✓ scrap area Adept (67074ms)
+[1]     ✓ scrap area Przydrożna (66692ms)
+[2]     ✓ scrap area Złotówka (69964ms)
+[1]     ✓ scrap area Zbędowa Skała (68058ms)
+[2]     ✓ scrap area Groszówka (67083ms)
+[1]     ✓ scrap area Zbędowy Murek (67299ms)
+[2]     ✓ scrap area Dymniok Biały (67004ms)
+[1]     ✓ scrap area Trzon (67302ms)
+[2]     ✓ scrap area Cyrk Cmentarzyska i Prawe Cmentarzysko (67720ms)
+[1]     ✓ scrap area Dziurawa (66580ms)
+[2]     ✓ scrap area Dymniok Szary (66841ms)
+[1]     ✓ scrap area Skała Nad Łąką (66168ms)
+[2]     ✓ scrap area Pośredniok (66967ms)
+[1]     ✓ scrap area Kanapa (69201ms)
+[2]     ✓ scrap area Skała z Krzyżem (68072ms)
+[1]     ✓ scrap area Jęzory (71099ms)
+[2]     ✓ scrap area Iglica (67212ms)
+[1]     ✓ scrap area Powroźnikowa (98599ms)
+[2]     ✓ scrap area Lewe Cmentarzysko (67279ms)
+[1]     ✓ scrap area Wysoka (67036ms)
+[2]     ✓ scrap area Borówka Kapliczka (68458ms)
+[1]     ✓ scrap area Obelisk (67296ms)
+[2]     ✓ scrap area Borówka Niżna (66715ms)
+[1]     ✓ scrap area Dzwon (67302ms)
+[2]     ✓ scrap area Borówka Okap (67555ms)
+[1]     ✓ scrap area Leśna Ściana (67508ms)
+[2]     ✓ scrap area Mur Skwirczyńskiego (67031ms)
+[1]     ✓ scrap area Leśna Kulista (68234ms)
+[2]     ✓ scrap area Misiaczek (66917ms)
+[2]     ✓ scrap area Średnik (66462ms)
+[1]     ✓ scrap area The Quarry  (99954ms)
+[1]     (Attempt 1 of 10) scrap area Skały Kadry
+[1]     (Attempt 2 of 10) scrap area Skały Kadry
+[2]     ✓ scrap area Wielka Turnia (70373ms)
+[1]     ✓ scrap area Skały Kadry (85188ms)
+[2]     ✓ scrap area Mała Turnia (68215ms)
+[1]     ✓ scrap area Tadzikowe (67547ms)
+[2]     ✓ scrap area Brandysowa (67027ms)
+[1]     ✓ scrap area Bukowie (68049ms)
+[2]     ✓ scrap area Kanion (69749ms)
+[1]     ✓ scrap area Murek z Wampirami (76253ms)
+[2]     ✓ scrap area Sokolica (74732ms)
+[1]     ✓ scrap area Wielka Ostryszniańska (67237ms)
+[2]     ✓ scrap area Luneta (66460ms)
+[1]     ✓ scrap area Sanatorium (66605ms)
+[2]     ✓ scrap area LXX (67927ms)
+[1]     ✓ scrap area Pociski (66983ms)
+[2]     ✓ scrap area Narożniak (66444ms)
+[1]     ✓ scrap area Szkatułka (67331ms)
+[2]     ✓ scrap area Zjazdowa Turnia (67977ms)
+[1]     ✓ scrap area Fortepian (66972ms)
+[2]     ✓ scrap area Rotunda (66572ms)
+[1]     ✓ scrap area Kowadło (67328ms)
+[2]     ✓ scrap area Pytajnik (67835ms)
+[1]     ✓ scrap area Cieplarnia (66589ms)
+[2]     ✓ scrap area Odpowiednik (66527ms)
+[2]     ✓ scrap area Zapytajnik (66913ms)
+[1]     ✓ scrap area Organy (100227ms)
+[2]     ✓ scrap area Rogata Grań (68212ms)
+[1]     ✓ scrap area Udórz (67012ms)
+[2]     ✓ scrap area Lajkonik (66556ms)
+[1]     ✓ scrap area Ruskowa Skała (66757ms)
+[1]     ✓ scrap area Zakocie (66551ms)
+[2]     ✓ scrap area Dupa Słonia (130296ms)
+[1]     ✓ scrap area Paśnik (66436ms)
+[2]     ✓ scrap area Obelisk (66156ms)
+[1]     ✓ scrap area Grodzisko Pańskie (71156ms)
+[2]     ✓ scrap area Bliźnięta (67559ms)
+[1]     ✓ scrap area Grodzisko Chłopskie (66455ms)
+[2]     ✓ scrap area Szeroki Mur (68117ms)
+[1]     ✓ scrap area Laboratorium (70075ms)
+[2]     ✓ scrap area Sępia Baszta (66934ms)
+[1]     ✓ scrap area Park Jurajski (70365ms)
+[2]     ✓ scrap area Chorobliwa Grań (67877ms)
+[2]     ✓ scrap area Dziurawa Turnia (67214ms)
+[1]     ✓ scrap area Jaskinia Jasna w Strzegowej (98962ms)
+[2]     ✓ scrap area Szeroka Turnia (67685ms)
+[1]     ✓ scrap area Biśnik (99331ms)
+[2]     ✓ scrap area Jastrzębia Turnia (66702ms)
+[1]     ✓ scrap area Duch (66640ms)
+[2]     ✓ scrap area Lotniki (70680ms)
+[1]     ✓ scrap area Skały Pustelnika (67396ms)
+[2]     ✓ scrap area Pochyła Grań (69921ms)
+[1]     ✓ scrap area Kopciówki (66504ms)
+[2]     ✓ scrap area Słoneczna Turnia (66706ms)
+[1]     ✓ scrap area Zubowe Skały (101345ms)
+[2]     ✓ scrap area Turnia Marcinkiewicza (67697ms)
+[1]     ✓ scrap area Okiennik (66730ms)
+[2]     ✓ scrap area Mała Płyta (66556ms)
+[1]     ✓ scrap area Góra Szczebel (66744ms)
+[2]     ✓ scrap area Łabajowa Baszta (66283ms)
+[1]     ✓ scrap area Furtki (66993ms)
+[2]     ✓ scrap area Łabajowa i Lipna Ściana (67887ms)
+[2]     ✓ scrap area Mniszkowa (66951ms)
+[1]     ✓ scrap area Chochołowe Skały (130673ms)
+[2]     ✓ scrap area Kula (69219ms)
+[1]     ✓ scrap area Skała Z Sosną (66982ms)
+[2]     ✓ scrap area Zaciszny Filar (66477ms)
+[2]     ✓ scrap area Kanapa (68647ms)
+[2]     ✓ scrap area Mnik (66841ms)
+[1]     (Attempt 1 of 10) scrap area Witkowe Skały
+[2]     (Attempt 1 of 10) scrap area Dębowe Skałki
+[2]     ✓ scrap area Dębowe Skałki (77600ms)
+[1]     (Attempt 2 of 10) scrap area Witkowe Skały
+[2]     ✓ scrap area Księżycowa Skała (66690ms)
+[2]     ✓ scrap area Skała w Łopiankach (66589ms)
+[2]     ✓ scrap area Diabla Skała (66913ms)
+[1]     (Attempt 3 of 10) scrap area Witkowe Skały
+[2]     (Attempt 1 of 10) scrap area Wodna Skała
+[2]     (Attempt 2 of 10) scrap area Wodna Skała
+[1]     (Attempt 4 of 10) scrap area Witkowe Skały
+[1]     (Attempt 5 of 10) scrap area Witkowe Skały
+[2]     ✓ scrap area Wodna Skała (114469ms)
+[2]     ✓ scrap area Labirynt (68338ms)
+[2]     ✓ scrap area Cygańska Turnia (67887ms)
+[1]     (Attempt 6 of 10) scrap area Witkowe Skały
+[2]     (Attempt 1 of 10) scrap area Dzika Baszta
+[1]     (Attempt 7 of 10) scrap area Witkowe Skały
+[2]     ✓ scrap area Dzika Baszta (86048ms)
+[2]     ✓ scrap area Mur Renarda (67036ms)
+[2]     (Attempt 1 of 10) scrap area Kazalnica
+[2]     (Attempt 2 of 10) scrap area Kazalnica
+[2]     (Attempt 3 of 10) scrap area Kazalnica
+[1]     (Attempt 8 of 10) scrap area Witkowe Skały
+[2]     (Attempt 4 of 10) scrap area Kazalnica
+[2]     (Attempt 5 of 10) scrap area Kazalnica
+[1]     (Attempt 9 of 10) scrap area Witkowe Skały
+[2]     ✓ scrap area Kazalnica (129749ms)
+[2]     ✓ scrap area Głowa Słonia (66361ms)
+[1]     1) scrap area Witkowe Skały
+[1]     (Attempt 1 of 10) scrap area Biały Kamień
+[1]     (Attempt 2 of 10) scrap area Biały Kamień
+[2]     ✓ scrap area Przełaz (68900ms)
+[2]     (Attempt 1 of 10) scrap area Wschodni Mur
+[2]     (Attempt 2 of 10) scrap area Wschodni Mur
+[2]     (Attempt 3 of 10) scrap area Wschodni Mur
+[1]     ✓ scrap area Biały Kamień (85622ms)
+[1]     ✓ scrap area Kamienie Żerkowickie (69156ms)
+[2]     ✓ scrap area Wschodni Mur (116950ms)
+[1]     ✓ scrap area Sowie Skały (99668ms)
+[2]     ✓ scrap area Filarek Bularza i Płytka Benduskiego (66686ms)
+[1]     ✓ scrap area Lew (67717ms)
+[2]     ✓ scrap area Eternit i Soczewka (69720ms)
+[1]     ✓ scrap area Karlin (73063ms)
+[2]     ✓ scrap area Połać Skwira (66791ms)
+[1]     ✓ scrap area Góra Słupska (68062ms)
+[2]     ✓ scrap area Piktogramy (67274ms)
+[1]     ✓ scrap area Barwinek (68316ms)
+[2]     ✓ scrap area Ogrodzieniec (98424ms)
+[1]     ✓ scrap area Brodło (67494ms)
+[2]     ✓ scrap area Ostatnia (67726ms)
+[1]     ✓ scrap area Łyse Plecy (70420ms)
+[2]     ✓ scrap area Dziewczynka (67174ms)
+[1]     ✓ scrap area Łyse Zęby (70261ms)
+[2]     ✓ scrap area Krzywosąd (66834ms)
+[2]     ✓ scrap area Węzia (66997ms)
+[1]     ✓ scrap area Łysa (99069ms)
+[2]     ✓ scrap area Drzewna (66464ms)
+[1]     ✓ scrap area Leśna (71260ms)
+[2]     ✓ scrap area Leszczynowa (66812ms)
+[1]     ✓ scrap area Baszty Z Niebieskim Szlakiem (70881ms)
+[2]     ✓ scrap area Menhir (67166ms)
+[1]     ✓ scrap area Zapad (68176ms)
+[2]     ✓ scrap area Brzuszna Skała (66869ms)
+[1]     ✓ scrap area Osiedle Wały (69110ms)
+[2]     ✓ scrap area Żmijowe (67050ms)
+[1]     ✓ scrap area Skała Rajcy (70094ms)
+[2]     ✓ scrap area Mysiura (66493ms)
+[1]     ✓ scrap area Strażnica Przewodziszowicka (70094ms)
+[2]     ✓ scrap area Skała artystów (67172ms)
+[1]     ✓ scrap area Kazalnica Suliszowicka (70151ms)
+[2]     ✓ scrap area Zręb (67505ms)
+[1]     ✓ scrap area Ostrężnik (69731ms)
+[2]     ✓ scrap area Obchodnia (67050ms)
+[1]     ✓ scrap area Sroga Skała (68098ms)
+[2]     ✓ scrap area Położna (66750ms)
+[2]     ✓ scrap area Lisie Jamy (67826ms)
+[1]     ✓ scrap area Góra Apteka (131384ms)
+[2]     ✓ scrap area Okrążek (67314ms)
+[1]     ✓ scrap area Skały Malwa  (99255ms)
+[2]     ✓ scrap area Filarki (67038ms)
+[1]     ✓ scrap area Kapuśniak i Brama Suliszowicka (68645ms)
+[2]     ✓ scrap area Skurwysyn (68082ms)
+[1]     ✓ scrap area Biedruniowa Skała (69215ms)
+[2]     ✓ scrap area Winnica (66817ms)
+[1]     ✓ scrap area Baba (68134ms)
+[2]     ✓ scrap area El Pułkownik (66490ms)
+[2]     (Attempt 1 of 10) scrap area Skały za szkołą
+[2]     (Attempt 2 of 10) scrap area Skały za szkołą
+[1]     ✓ scrap area Igły Olkuskie (70792ms)
+[1]     ✓ scrap area Pazurek (70312ms)
+[2]     ✓ scrap area Skały za szkołą (113736ms)
+[1]     ✓ scrap area Turnia Nad Kopalnią (69128ms)
+[2]     ✓ scrap area Esteci (66997ms)
+[1]     ✓ scrap area Turnia Drwali (66827ms)
+[2]     ✓ scrap area Szara Ścianka (66551ms)
+[1]     ✓ scrap area Skała z Rynną (67314ms)
+[2]     ✓ scrap area Baba Jaga (67067ms)
+[2]     ✓ scrap area Freney (67014ms)
+[1]     ✓ scrap area Januszkowa Baszta (100140ms)
+[2]     ✓ scrap area Ciąża (66724ms)
+[1]     ✓ scrap area Skały w Pomorzanach (98981ms)
+[2]     ✓ scrap area Problemówka (67282ms)
+[1]     ✓ scrap area Skała Zachwytu (67753ms)
+[2]     ✓ scrap area Turnia Długosza (67508ms)
+[1]     ✓ scrap area Poganowe Skały (66643ms)
+[2]     ✓ scrap area Czarna Ścianka (67168ms)
+[1]     ✓ scrap area Skała Nad Potokiem (67482ms)
+[2]     ✓ scrap area Płetwa (66798ms)
+[1]     ✓ scrap area Pochylce (68151ms)
+[2]     ✓ scrap area Żabka (66611ms)
+[1]     ✓ scrap area Racuch (67082ms)
+[2]     ✓ scrap area Okręt (68546ms)
+[1]     ✓ scrap area Ślimak (67058ms)
+[2]     ✓ scrap area Tarasowata Turnia (67301ms)
+[2]     ✓ scrap area Turnia Marcinkowskiego (66743ms)
+[1]     ✓ scrap area Zastudnie (99107ms)
+[2]     ✓ scrap area Krucha Turnia (67101ms)
+[1]     ✓ scrap area Skrzat i Soczewka (67064ms)
+[2]     ✓ scrap area Turnia z Krokiem (67740ms)
+[1]     ✓ scrap area Przewieszony Mur (66800ms)
+[2]     ✓ scrap area Wysoka Płyta (66720ms)
+[1]     ✓ scrap area Turnie Simonda (69792ms)
+[2]     ✓ scrap area Szara Płyta (67255ms)
+[1]     ✓ scrap area Sokola Baszta (67258ms)
+[2]     ✓ scrap area Zjazdowa Turnia (66520ms)
+[1]     ✓ scrap area Boniek (102376ms)
+[2]     ✓ scrap area Dwoista Turnia (66836ms)
+[2]     ✓ scrap area Bodzio (67352ms)
+[1]     ✓ scrap area Sektor Solidarności (131290ms)
+[2]     ✓ scrap area Turnia z Krzyżem (67307ms)
+[1]     ✓ scrap area Pielgrzym (67278ms)
+[2]     ✓ scrap area Cycówka i Piersiówka (68072ms)
+[1]     ✓ scrap area Długa Góra (66398ms)
+[2]     ✓ scrap area Żabi Koń (67818ms)
+[1]     ✓ scrap area Ząbczysko (67561ms)
+[2]     ✓ scrap area Dziób Kobylański (67164ms)
+[1]     ✓ scrap area Góry Towarne Duże (68972ms)
+[2]     ✓ scrap area Mnich (66427ms)
+[1]     ✓ scrap area Góry Towarne Małe (69931ms)
+[2]     ✓ scrap area Przydrożna Skała 3 (66783ms)
+[1]     ✓ scrap area Skała Miłości w Mstowie (67361ms)
+[2]     ✓ scrap area Przydrożna Skała 2 (66731ms)
+[1]     ✓ scrap area Kuropatwa (67681ms)
+[2]     ✓ scrap area Przydrożna Skała 1 (66918ms)
+[1]     ✓ scrap area Mirów nad Wartą  (67306ms)
+[2]     ✓ scrap area Ponad Gnój Turnia (67002ms)
+[2]     ✓ scrap area Filar Abazego (66765ms)
+[1]     (Attempt 1 of 10) scrap area Biblioteka
+[2]     ✓ scrap area Poprzeczna Grzęda (66351ms)
+[2]     ✓ scrap area Zamarła Turnia (67105ms)
+[2]     ✓ scrap area Mur Pokutników (67490ms)
+[1]     (Attempt 2 of 10) scrap area Biblioteka
+[2]     ✓ scrap area Ostra Turniczka (67068ms)
+[2]
+[2]
+[2]   313 passing (7h)
+[2]
+[2]
+[2]   (Results)
+[2]
+[2]   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+[2]   │ Tests:        313                                                                              │
+[2]   │ Passing:      313                                                                              │
+[2]   │ Failing:      0                                                                                │
+[2]   │ Pending:      0                                                                                │
+[2]   │ Skipped:      0                                                                                │
+[2]   │ Screenshots:  0                                                                                │
+[2]   │ Video:        false                                                                            │
+[2]   │ Duration:     393 minutes, 51 seconds                                                          │
+[2]   │ Spec Ran:     scrap-areas.spec.ts                                                              │
+[2]   └────────────────────────────────────────────────────────────────────────────────────────────────┘
+[2]
+[2]
+[2] ====================================================================================================
+[2]
+[2]   (Run Finished)
+[2]
+[2]
+[2]        Spec                                              Tests  Passing  Failing  Pending  Skipped
+[2]   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+[2]   │ ✔  scrap-areas.spec.ts                    6:33:51      313      313        -        -        - │
+[2]   └────────────────────────────────────────────────────────────────────────────────────────────────┘
+[2]     ✔  All specs passed!                      6:33:51      313      313        -        -        -
+[2]
+[2] sleep 8 && yarn headless --env=sliceStart=314,sliceEnd=627 exited with code 0
+[1]     (Attempt 3 of 10) scrap area Biblioteka
+[1]     (Attempt 4 of 10) scrap area Biblioteka
+[1]     (Attempt 5 of 10) scrap area Biblioteka
+[1]     (Attempt 6 of 10) scrap area Biblioteka
+[1]     (Attempt 7 of 10) scrap area Biblioteka
+[1]     (Attempt 8 of 10) scrap area Biblioteka
+[1]     (Attempt 9 of 10) scrap area Biblioteka
+[1]     2) scrap area Biblioteka
+[1]     ✓ scrap area Zielona Góra (71874ms)
+[1]     ✓ scrap area Ule, Słoń i Różowa Ścianka (69913ms)
+[1]     ✓ scrap area Grupa Łysej (71056ms)
+[1]     ✓ scrap area Grupa Knura (100989ms)
+[1]     ✓ scrap area Skały Na Wzgórzu (68878ms)
+[1]     ✓ scrap area Kacza Skała (67466ms)
+[1]     ✓ scrap area Góra Kosia (67455ms)
+[1]     ✓ scrap area Strażnica (68167ms)
+[1]     ✓ scrap area Weselna (68471ms)
+[1]     ✓ scrap area Skrzynia (68247ms)
+[1]     ✓ scrap area Fircyk (67708ms)
+[1]     ✓ scrap area Felin (67826ms)
+[1]     ✓ scrap area Zwierzyniec (67688ms)
+[1]     ✓ scrap area Niwień (67669ms)
+[1]     ✓ scrap area Góra Popielowa (69526ms)
+[1]     ✓ scrap area Bogdanka (70994ms)
+[1]     ✓ scrap area Skała Apteka (103248ms)
+[1]     ✓ scrap area Łężec (132458ms)
+[1]     ✓ scrap area Gips (100554ms)
+[1]     ✓ scrap area Blin, Okręt, Z Jałowcem (67333ms)
+[1]     ✓ scrap area Biakło (68316ms)
+[1]
+[1]
+[1]   312 passing (7h)
+[1]   2 failing
+[1]
+[1]   1) scrap areas
+[1]        scrap area Witkowe Skały:
+[1]      Error: the response {"name":"CypressError","stack":"[object Response]\nFrom Your Spec Code:\n    at Object.scrapClimbingRoutesAndHolds (https://topo.portalgorski.pl/__cypress/tests?p=src/scrap-areas.spec.ts:972:10)\n    at Context.eval (https://topo.portalgorski.pl/__cypress/tests?p=src/scrap-areas.spec.ts:1033:32)","sourceMappedStack":"[object Response]\nFrom Your Spec Code:\n    at Object.scrapClimbingRoutesAndHolds (webpack:///./src/modules/scrapers.ts:82:6)\n    at Context.eval (webpack:///./src/scrap-areas.spec.ts:51:16)","parsedStack":[{"message":"[object Response]","whitespace":""},{"message":"From Your Spec Code:","whitespace":""},{"function":"Object.scrapClimbingRoutesAndHolds","fileUrl":"https://topo.portalgorski.pl/__cypress/tests?p=src/scrap-areas.spec.ts","originalFile":"webpack:///./src/modules/scrapers.ts","relativeFile":"src/modules/scrapers.ts","absoluteFile":"/Users/mikep/git/topo-offline-scrapper/src/modules/scrapers.ts","line":82,"column":6,"whitespace":"    "},{"function":"Context.eval","fileUrl":"https://topo.portalgorski.pl/__cypress/tests?p=src/scrap-areas.spec.ts","originalFile":"webpack:///./src/scrap-areas.spec.ts","relativeFile":"src/scrap-areas.spec.ts","absoluteFile":"/Users/mikep/git/topo-offline-scrapper/src/scrap-areas.spec.ts","line":51,"column":16,"whitespace":"    "}],"codeFrame":{"line":82,"column":6,"originalFile":"src/modules/scrapers.ts","relativeFile":"src/modules/scrapers.ts","absoluteFile":"/Users/mikep/git/topo-offline-scrapper/src/modules/scrapers.ts","frame":"  80 |     .wait(0)\n  81 |     .then(() => cy.log(`Scraping ${sectionKeysets.length} climbing routes...`))\n> 82 |     .then({timeout: REQUEST_TIMEOUT}, () => fetchClimbingRoutesAndHolds(sectionKeysets));\n     |      ^\n  83 | }\n  84 | ","language":"ts"},"hasFailed":true,"isPending":true} was thrown, throw an Error :)
+[1]       at thrown2Error (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:124097:10)
+[1]       at Runner.fail (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:174333:25)
+[1]       at Test.<anonymous> (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:123770:18)
+[1]       at next (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:176537:24)
+[1]       at https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:176566:13
+[1]       at tryCatcher (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:13212:23)
+[1]       at Promise._settlePromiseFromHandler (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:11147:31)
+[1]       at Promise._settlePromise (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:11204:18)
+[1]       at Promise._settlePromise0 (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:11249:10)
+[1]       at Promise._settlePromises (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:11329:18)
+[1]       at Promise._fulfill (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:11273:18)
+[1]       at Promise._resolveCallback (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:11067:57)
+[1]       at Promise._settlePromiseFromHandler (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:11159:17)
+[1]       at Promise._settlePromise (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:11204:18)
+[1]       at Promise._settlePromise0 (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:11249:10)
+[1]
+[1]   2) scrap areas
+[1]        scrap area Biblioteka:
+[1]      CypressError: `cy.then()` timed out after waiting `120000ms`.
+[1]
+[1] Your callback function returned a promise that never resolved.
+[1]
+[1] The callback function was:
+[1]
+[1] function () { return (0, fetch_climbing_holds_1.fetchClimbingRoutesAndHolds)(sectionKeysets); }
+[1]
+[1] https://on.cypress.io/then
+[1]       at https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:153120:83
+[1]       at tryCatcher (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:13212:23)
+[1]       at https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:8334:41
+[1]       at tryCatcher (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:13212:23)
+[1]       at Promise._settlePromiseFromHandler (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:11147:31)
+[1]       at Promise._settlePromise (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:11204:18)
+[1]       at Promise._settlePromise0 (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:11249:10)
+[1]       at Promise._settlePromises (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:11325:18)
+[1]       at _drainQueueStep (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:7919:12)
+[1]       at _drainQueue (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:7912:9)
+[1]       at Async.../../node_modules/bluebird/js/release/async.js.Async._drainQueues (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:7928:5)
+[1]       at Async.drainQueues (https://topo.portalgorski.pl/__cypress/runner/cypress_runner.js:7798:14)
+[1]   From Your Spec Code:
+[1]       at Object.scrapClimbingRoutesAndHolds (https://topo.portalgorski.pl/__cypress/tests?p=src/scrap-areas.spec.ts:972:10)
+[1]       at Context.eval (https://topo.portalgorski.pl/__cypress/tests?p=src/scrap-areas.spec.ts:1033:32)
+[1]
+[1]
+[1]
+[1]
+[1]   (Results)
+[1]
+[1]   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+[1]   │ Tests:        314                                                                              │
+[1]   │ Passing:      312                                                                              │
+[1]   │ Failing:      2                                                                                │
+[1]   │ Pending:      0                                                                                │
+[1]   │ Skipped:      0                                                                                │
+[1]   │ Screenshots:  0                                                                                │
+[1]   │ Video:        false                                                                            │
+[1]   │ Duration:     447 minutes, 29 seconds                                                          │
+[1]   │ Spec Ran:     scrap-areas.spec.ts                                                              │
+[1]   └────────────────────────────────────────────────────────────────────────────────────────────────┘
+[1]
+[1]
+[1] ====================================================================================================
+[1]
+[1]   (Run Finished)
+[1]
+[1]
+[1]        Spec                                              Tests  Passing  Failing  Pending  Skipped
+[1]   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+[1]   │ ✖  scrap-areas.spec.ts                    7:27:29      314      312        2        -        - │
+[1]   └────────────────────────────────────────────────────────────────────────────────────────────────┘
+[1]     ✖  1 of 1 failed (100%)                   7:27:29      314      312        2        -        -
+[1]
+error Command failed with exit code 2.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[1] sleep 0 && yarn headless --env=sliceStart=0,sliceEnd=314 exited with code 2
+[UnhandledPromiseRejection: This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason "[object Array]".] {
+  code: 'ERR_UNHANDLED_REJECTION'
+}
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+mikepwork:topo-offline-scrapper mikep$

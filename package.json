@@ -7,15 +7,18 @@
     "build": "tsc",
     "start": "cypress open",
     "headless": "cypress run --spec \"src/scrap-areas.spec.ts\" --headless",
+    "parallel": "ts-node src/scripts/scrap-in-parallel",
     "merge": "ts-node src/scripts/merge",
     "getimages": "ts-node src/scripts/get-images",
     "lint": "eslint . --ext .ts"
   },
   "devDependencies": {
+    "@types/concurrently": "^6.2.1",
     "@types/lodash": "^4.14.171",
     "@types/node": "^16.6.1",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
+    "commander": "^8.2.0",
     "concurrently": "^6.2.0",
     "cypress": "^8.4.0",
     "eslint": "^7.31.0",
